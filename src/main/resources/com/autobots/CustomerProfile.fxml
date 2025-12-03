@@ -8,8 +8,10 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane id="nameProperty" stylesheets="styles.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<Pane id="nameProperty" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Label fx:id="contactInformation1" layoutX="375.0" layoutY="124.0" prefHeight="17.0" prefWidth="119.0" text="Payment method" />
+      <ListView layoutX="373.0" layoutY="153.0" prefHeight="200.0" prefWidth="200.0" />
       <TableView id="orderTable" layoutX="66.0" layoutY="190.0" prefHeight="155.0" prefWidth="273.0">
         <columns>
           <TableColumn id="pizzaTypeCol" prefWidth="123.0" text="Pizza Type" />
@@ -18,15 +20,14 @@
             <TableColumn id="dateCol" minWidth="0.0" prefWidth="58.0" text="Total" />
         </columns>
       </TableView>
-      <Label id="nameProperty" fx:id="nameProperty" layoutX="115.0" layoutY="89.0" prefHeight="17.0" prefWidth="130.0" text="Name" />
-      <Label fx:id="phoneProperty" layoutX="114.0" layoutY="113.0" prefHeight="17.0" prefWidth="130.0" text="PhoneNumber" />
-      <Label fx:id="contactInformation" layoutX="103.0" layoutY="60.0" prefHeight="17.0" prefWidth="119.0" text="Contact Information" />
-      <Label fx:id="addressProperty" layoutX="115.0" layoutY="136.0" prefHeight="17.0" prefWidth="130.0" text="Address" />
+      <Label id="nameProperty" fx:id="nameLabel" layoutX="98.0" layoutY="106.0" prefHeight="17.0" prefWidth="130.0" text="Name" />
+      <Label fx:id="phoneLabel" layoutX="98.0" layoutY="122.0" prefHeight="17.0" prefWidth="130.0" text="PhoneNumber" />
+      <Label fx:id="contactInformation" layoutX="90.0" layoutY="85.0" prefHeight="17.0" prefWidth="119.0" text="Contact Information" />
+      <Label fx:id="addressLabel" layoutX="98.0" layoutY="139.0" prefHeight="17.0" prefWidth="130.0" text="Address" />
       <Button layoutX="387.0" layoutY="75.0" mnemonicParsing="false" text="Edit" />
-      <Button fx:id="back" layoutX="30.0" layoutY="53.0" mnemonicParsing="false" text="&lt; Back" />
+      <Button fx:id="back" layoutX="23.0" layoutY="65.0" mnemonicParsing="false" text="&lt; Back" />
       <Label fx:id="orderHistory" layoutX="68.0" layoutY="166.0" prefHeight="17.0" prefWidth="119.0" text="Order History" />
       <BorderPane layoutX="-1.0" layoutY="-2.0" prefHeight="45.0" prefWidth="607.0" />
-      <ListView layoutX="373.0" layoutY="153.0" prefHeight="200.0" prefWidth="200.0" />
-      <Label fx:id="contactInformation1" layoutX="375.0" layoutY="124.0" prefHeight="17.0" prefWidth="119.0" text="Payment method" />
+      <Label text="Label" />
    </children>
 </Pane>
