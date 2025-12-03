@@ -1,10 +1,12 @@
 package com.autobots;
 
-import application.model.Customer;
-import application.model.Order;
+import com.autobots.Customer;
+import com.autobots.Order;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +14,7 @@ import javafx.collections.ObservableList;
 
 public class CustomerProfileController {
 
-
+    //Contact Info
     @FXML
     private Label nameLabel;
     @FXML
@@ -32,10 +34,10 @@ public class CustomerProfileController {
     @FXML
     private TableColumn<Order, String> totalCol;
 
-    
-    //for now this is a placeholder. This will need the Order.java model for this to be used
+    @FXML
+    private ListView<String> paymentList;
 
-    //data fields
+
     private Customer currentCustomer;
 
     @FXML
@@ -46,7 +48,8 @@ public class CustomerProfileController {
         totalCol.setCellValueFactory(cellData -> cellData.getValue().totalProperty());
 
         //This is the placeholder data (needs to be actual data later)
-        loadCustomerData(new Customer("Guest Name", "555-123-4567", "ABC Street"));
+        Customer mockCustomer = new Customer("Xavier Terry", "578-311-4000", "4321 Street St, Marietta, GA");
+        loadCustomerData(mockCustomer);
     }
 
     void loadCustomerData(Customer customer){
