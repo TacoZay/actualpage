@@ -31,6 +31,8 @@ public class CustomerProfileController {
     private TableColumn<Order, String> tipCol;
     @FXML
     private TableColumn<Order, String> totalCol;
+
+    
     //for now this is a placeholder. This will need the Order.java model for this to be used
 
     //data fields
@@ -48,7 +50,10 @@ public class CustomerProfileController {
     }
 
     void loadCustomerData(Customer customer){
-        
+        this.currentCustomer = customer;
+        nameLabel.textProperty().bind(customer.nameProperty());
+        phoneLabel.textProperty().bind(customer.phoneProperty());
+        addressLabel.textProperty().bind(customer.addressProperty());
     }
 
 }

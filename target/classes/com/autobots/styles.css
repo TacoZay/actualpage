@@ -1,0 +1,65 @@
+/*What would be the main components that would be on each page*/
+/*Global variables*/
+.root{
+    /*brand colors*/
+    -fx-base: #FFFFFF;
+    -fx-accent: #D32F2F;
+    -fx-background-color: #302929;
+
+    /*Text Colors*/
+    -fx-text-base-color: #333333;
+    -fx-text-header-color:#000000;
+
+    /*Font Settings*/
+    -fx-font-family: "Segoe UI", Helvetica, Arial;
+    -fx-font-size: 14px;
+
+}
+
+.label {
+    -fx-text-fill: -fx-text-base-color;
+}
+/*Main page titles*/
+.page-title{
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-header-color;
+    -fx-padding: 10 0 20 0;
+}
+
+/*Section Headers*/
+.section-header {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #555555;
+    -fx-padding: 5 0 10 0;
+    -fx-border-color: transparent transparent #D32F2F transparent;
+
+}
+
+.button {
+    -fx-background-color: #E0E0E0;
+    -fx-text-fill: #333333;
+    -fx-backgorund-radius: 4;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color:#D6D6D6;
+}
+
+.button-primary{ 
+    -fx-background-color: #D32F2F;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
+
+.button-primary:hover{
+    -fx-background-color: #B71C1C
+}
+
+.nav-button {
+    -fx-background-color
+}
