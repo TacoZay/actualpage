@@ -38,7 +38,7 @@
 }
 
 .button {
-    -fx-background-color: #b30505;
+    -fx-background-color: #E0E0E0;
     -fx-text-fill: #333333;
     -fx-backgorund-radius: 4;
     -fx-padding: 8 16;
@@ -61,5 +61,5 @@
 }
 
 .nav-button {
-    -fx-background-color
+    -fx-background-color: transparent;
 }

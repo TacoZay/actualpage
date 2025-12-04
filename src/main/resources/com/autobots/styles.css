@@ -61,5 +61,5 @@
 }
 
 .nav-button {
-    -fx-background-color
+    -fx-background-color: transparent;
 }

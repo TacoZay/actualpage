@@ -5,12 +5,12 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <Pane id="nameProperty" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="contactInformation1" layoutX="375.0" layoutY="124.0" prefHeight="17.0" prefWidth="119.0" text="Payment method" />
+      <Label fx:id="paymentMethod" layoutX="375.0" layoutY="124.0" prefHeight="17.0" prefWidth="119.0" text="Payment method" />
       <ListView layoutX="373.0" layoutY="153.0" prefHeight="200.0" prefWidth="200.0" />
       <TableView id="orderTable" layoutX="66.0" layoutY="190.0" prefHeight="155.0" prefWidth="273.0">
         <columns>
@@ -20,14 +20,16 @@
             <TableColumn id="dateCol" minWidth="0.0" prefWidth="58.0" text="Total" />
         </columns>
       </TableView>
-      <Label id="nameProperty" fx:id="nameLabel" layoutX="98.0" layoutY="106.0" prefHeight="17.0" prefWidth="130.0" text="Name" />
+      <Label fx:id="nameLabel" layoutX="98.0" layoutY="106.0" prefHeight="17.0" prefWidth="130.0" text="Name" />
       <Label fx:id="phoneLabel" layoutX="98.0" layoutY="122.0" prefHeight="17.0" prefWidth="130.0" text="PhoneNumber" />
-      <Label fx:id="contactInformation" layoutX="90.0" layoutY="85.0" prefHeight="17.0" prefWidth="119.0" text="Contact Information" />
+      <Label fx:id="contactInformation" layoutX="90.0" layoutY="85.0" prefHeight="17.0" prefWidth="119.0" styleClass="section-header" text="Contact Information" />
       <Label fx:id="addressLabel" layoutX="98.0" layoutY="139.0" prefHeight="17.0" prefWidth="130.0" text="Address" />
-      <Button layoutX="387.0" layoutY="75.0" mnemonicParsing="false" text="Edit" />
+      <Button layoutX="375.0" layoutY="81.0" mnemonicParsing="false" text="Edit" />
       <Button fx:id="back" layoutX="23.0" layoutY="65.0" mnemonicParsing="false" text="&lt; Back" />
-      <Label fx:id="orderHistory" layoutX="68.0" layoutY="166.0" prefHeight="17.0" prefWidth="119.0" text="Order History" />
-      <BorderPane layoutX="-1.0" layoutY="-2.0" prefHeight="45.0" prefWidth="607.0" />
-      <Label text="Label" />
+      <Label fx:id="orderHistory" layoutX="68.0" layoutY="166.0" prefHeight="17.0" prefWidth="175.0" text="Order History">
+         <font>
+            <Font name="Elephant" size="17.0" />
+         </font></Label>
+      <Label fx:id="profileLabel" layoutX="47.0" layoutY="35.0" prefHeight="17.0" prefWidth="119.0" text="Profile" />
    </children>
 </Pane>
