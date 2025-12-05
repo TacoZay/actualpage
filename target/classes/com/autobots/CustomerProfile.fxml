@@ -20,16 +20,16 @@
             <TableColumn id="dateCol" minWidth="0.0" prefWidth="58.0" text="Total" />
         </columns>
       </TableView>
-      <Label fx:id="nameLabel" layoutX="98.0" layoutY="106.0" prefHeight="17.0" prefWidth="130.0" text="Name" />
-      <Label fx:id="phoneLabel" layoutX="98.0" layoutY="122.0" prefHeight="17.0" prefWidth="130.0" text="PhoneNumber" />
-      <Label fx:id="contactInformation" layoutX="90.0" layoutY="85.0" prefHeight="17.0" prefWidth="119.0" styleClass="section-header" text="Contact Information" />
-      <Label fx:id="addressLabel" layoutX="98.0" layoutY="139.0" prefHeight="17.0" prefWidth="130.0" text="Address" />
+      <Label fx:id="nameLabel" layoutX="108.0" layoutY="106.0" prefHeight="17.0" prefWidth="130.0" text="Name" />
+      <Label fx:id="phoneLabel" layoutX="108.0" layoutY="122.0" prefHeight="17.0" prefWidth="130.0" text="PhoneNumber" />
+      <Label fx:id="contactInformation" layoutX="90.0" layoutY="65.0" prefHeight="41.0" prefWidth="190.0" styleClass="section-header" text="Contact Information" />
+      <Label fx:id="addressLabel" layoutX="108.0" layoutY="139.0" prefHeight="17.0" prefWidth="130.0" text="Address" />
       <Button layoutX="375.0" layoutY="81.0" mnemonicParsing="false" text="Edit" />
-      <Button fx:id="back" layoutX="23.0" layoutY="65.0" mnemonicParsing="false" text="&lt; Back" />
+      <Button fx:id="back" layoutX="1.0" layoutY="78.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="82.0" text="Back" />
       <Label fx:id="orderHistory" layoutX="68.0" layoutY="166.0" prefHeight="17.0" prefWidth="175.0" text="Order History">
          <font>
-            <Font name="Elephant" size="17.0" />
+            <Font size="17.0" />
          </font></Label>
-      <Label fx:id="profileLabel" layoutX="47.0" layoutY="35.0" prefHeight="17.0" prefWidth="119.0" text="Profile" />
+      <Label fx:id="profileLabel" layoutX="23.0" layoutY="36.0" prefHeight="17.0" prefWidth="119.0" styleClass="page-title" text="Profile" />
    </children>
 </Pane>

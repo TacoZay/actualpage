@@ -41,7 +41,7 @@ public class CustomerProfileController {
     private Customer currentCustomer;
 
     @FXML
-    public void initialize(){
+    public void initialize(){                                                                               //why does initialize() have to done manually? Is this considered the initializing of values
         pizzaTypeCol.setCellValueFactory(cellData -> cellData.getValue().pizzaTypeProperty());
         dateCol.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         tipCol.setCellValueFactory(cellData -> cellData.getValue().tipProperty());
