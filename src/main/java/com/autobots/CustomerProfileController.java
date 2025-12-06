@@ -11,9 +11,14 @@ import javafx.scene.control.TableView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.beans.binding.Bindings;
-
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 
 public class CustomerProfileController {
+
+    @FXML private AnchorPane rootPane;
+    @FXML private Label profileLabel;
 
     //Contact Info
     @FXML
@@ -38,11 +43,69 @@ public class CustomerProfileController {
     @FXML
     private ListView<String> paymentList;
 
+    /* --- Navigation Controls ---  */
+    @FXML
+    private void onMenu(){
+        System.out.println("Navigate to Menu...");
+        //App.setRoot("menu");
+    }
 
+    @FXML
+    private void onCart(){
+        System.out.println("Navigate to Cart...");
+        //App.setRoot("cart");
+    }
+    @FXML
+    private void onLogout() {
+        //Clear user session if needed
+        // App.setRoot("primary");
+    }
+
+
+    /* --- Edit controls */
+    @FXML private TextField nameInput;
+    @FXML private TextField phoneInput;
+    @FXML private TextField addressInput;
+    @FXML private Button editButton;
+
+
+    @FXML
+    private void onToggleEdit(){
+        if(editButton.getText().equals("Edit")){
+            nameInput.setText(currentCustomer.nameProperty().get());
+            phoneInput.setText(currentCustomer.phoneProperty().get());
+            addressInput.setText(currentCustomer.addressProperty().get());
+
+            toggleVisibility(true);
+            editButton.setText("Save");
+        } else {
+
+            /* --- Save Changes --- */
+            currentCustomer.nameProperty().set(nameInput.getText());
+            currentCustomer.phoneProperty().set(phoneInput.getText());
+            currentCustomer.addressProperty().set(addressInput.getText());
+
+            toggleVisibility(false);
+            editButton.setText("Edit");
+        }
+    }
+
+    private void toggleVisibility(boolean isEditing){
+        //Toggle Inputs
+        nameInput.setVisible(isEditing);
+        phoneInput.setVisible(isEditing);
+        addressInput.setVisible(isEditing);
+
+        //Toggle Labels
+        nameLabel.setVisible(!isEditing);
+        phoneLabel.setVisible(!isEditing);
+        addressLabel.setVisible(!isEditing);
+    }
     private Customer currentCustomer;
 
     @FXML
-    public void initialize(){                                                                               //why does initialize() have to done manually? Is this considered the initializing of values
+    public void initialize(){      
+        profileLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", rootPane.widthProperty().divide(35), "px;"));                                                                        //why does initialize() have to done manually? Is this considered the initializing of values
         pizzaTypeCol.setCellValueFactory(cellData -> cellData.getValue().pizzaTypeProperty());
         dateCol.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         tipCol.setCellValueFactory(cellData -> cellData.getValue().tipProperty());

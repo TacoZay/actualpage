@@ -5,14 +5,19 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="nameProperty" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.autobots.CustomerProfileController">
+<AnchorPane id="nameProperty" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.autobots.CustomerProfileController">
    <children>
       <Label fx:id="paymentMethod" layoutX="375.0" layoutY="141.0" prefHeight="17.0" prefWidth="119.0" text="Payment method" />
       <ListView layoutX="373.0" layoutY="170.0" prefHeight="200.0" prefWidth="200.0" />
-      <TableView id="orderTable" layoutX="66.0" layoutY="207.0" prefHeight="155.0" prefWidth="273.0">
+      <TableView fx:id="orderTable" layoutX="50.0" layoutY="221.0" prefHeight="155.0" prefWidth="273.0">
         <columns>
           <TableColumn fx:id="pizzaTypeCol" prefWidth="123.0" text="Pizza Type" />
           <TableColumn fx:id="dateCol" minWidth="0.0" prefWidth="55.0" text="Date" />
@@ -20,18 +25,17 @@
             <TableColumn fx:id="totalCol" minWidth="0.0" prefWidth="58.0" text="Total" />
         </columns>
       </TableView>
-      <Label fx:id="nameLabel" layoutX="89.0" layoutY="123.0" prefHeight="18.0" prefWidth="246.0" text="Name" />
-      <Label fx:id="phoneLabel" layoutX="89.0" layoutY="139.0" prefHeight="18.0" prefWidth="246.0" text="PhoneNumber" />
       <Label fx:id="contactInformation" layoutX="90.0" layoutY="82.0" prefHeight="41.0" prefWidth="190.0" styleClass="section-header" text="Contact Information" />
-      <Label fx:id="addressLabel" layoutX="89.0" layoutY="156.0" prefHeight="18.0" prefWidth="246.0" text="Address" />
-      <Button layoutX="375.0" layoutY="98.0" mnemonicParsing="false" text="Edit" />
+
+      <javafx.scene.control.TextField fx:id="nameInput" layoutX="85.0" layoutY="119.0" prefHeight="25.0" prefWidth="250.0" visible="false" />
+      <Button fx:id="editButton" layoutX="375.0" layoutY="98.0" mnemonicParsing="false" onAction="#onToggleEdit" text="Edit" />
       <Button fx:id="back" layoutX="1.0" layoutY="95.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="82.0" text="Back" />
-      <Label fx:id="orderHistory" layoutX="68.0" layoutY="183.0" prefHeight="17.0" prefWidth="175.0" text="Order History">
+      <Label fx:id="orderHistory" layoutX="52.0" layoutY="197.0" prefHeight="17.0" prefWidth="175.0" text="Order History">
          <font>
             <Font size="17.0" />
          </font></Label>
-      <Label fx:id="profileLabel" layoutX="23.0" layoutY="46.0" prefHeight="17.0" prefWidth="119.0" styleClass="page-title" text="Profile" />
-      <Pane layoutX="-5.0" layoutY="-6.0" prefHeight="49.0" prefWidth="606.0" styleClass="header-background">
+      <Label fx:id="profileLabel" layoutX="23.0" layoutY="34.0" prefHeight="78.0" prefWidth="235.0" styleClass="page-title" text="Profile" />
+      <Pane layoutX="-5.0" layoutY="-6.0" prefHeight="49.0" prefWidth="606.0" styleClass="header-background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <Button layoutY="13.0" mnemonicParsing="false" onAction="#onMenu" styleClass="nav-button" text="Menu" />
             <Button layoutX="53.0" layoutY="13.0" mnemonicParsing="false" onAction="#onCart" prefHeight="18.0" prefWidth="70.0" styleClass="nav-button" text="Cart" />
@@ -40,5 +44,24 @@
             <Label fx:id="headerNameLabel" layoutX="481.0" layoutY="24.0" styleClass="header-text" text="Customer Name" />
          </children>
       </Pane>
+      <javafx.scene.layout.GridPane hgap="10.0" vgap="10.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="160.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="78.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="122.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="nameLabel" prefHeight="18.0" prefWidth="246.0" text="[Name]" GridPane.columnIndex="1" />
+            <Label fx:id="phoneLabel" prefHeight="25.0" prefWidth="122.0" text="[PhoneNumber]" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="addressLabel" prefHeight="18.0" prefWidth="246.0" text="[Address]" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Name:" />
+            <Label text="Phone:" GridPane.rowIndex="1" />
+            <Label prefHeight="18.0" prefWidth="76.0" text="Address:" GridPane.rowIndex="2" />
+         </children>
+      </javafx.scene.layout.GridPane>
    </children>
 </AnchorPane>
