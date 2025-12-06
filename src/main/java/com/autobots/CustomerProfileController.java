@@ -10,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.beans.binding.Bindings;
 
 
 public class CustomerProfileController {
@@ -54,9 +55,9 @@ public class CustomerProfileController {
 
     void loadCustomerData(Customer customer){
         this.currentCustomer = customer;
-        nameLabel.textProperty().bind(customer.nameProperty());
-        phoneLabel.textProperty().bind(customer.phoneProperty());
-        addressLabel.textProperty().bind(customer.addressProperty());
+        nameLabel.textProperty().bind(Bindings.concat("Name: ", customer.nameProperty()));
+        phoneLabel.textProperty().bind(Bindings.concat("Phone: ", customer.phoneProperty()));
+        addressLabel.textProperty().bind(Bindings.concat("Address: ", customer.addressProperty()));
     }
 
 }

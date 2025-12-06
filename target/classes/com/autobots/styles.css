@@ -99,3 +99,21 @@
 .button-secondary:hover {
     -fx-background-color: #D5D5D5;
 }
+
+/*Dark Grey Header Bar*/
+.header-background{
+    -fx-background-color: #333333;
+}
+
+.nav-button{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.header-text{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}

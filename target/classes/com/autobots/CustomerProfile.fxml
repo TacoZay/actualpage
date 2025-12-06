@@ -8,28 +8,37 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane id="nameProperty" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="nameProperty" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.autobots.CustomerProfileController">
    <children>
-      <Label fx:id="paymentMethod" layoutX="375.0" layoutY="124.0" prefHeight="17.0" prefWidth="119.0" text="Payment method" />
-      <ListView layoutX="373.0" layoutY="153.0" prefHeight="200.0" prefWidth="200.0" />
-      <TableView id="orderTable" layoutX="66.0" layoutY="190.0" prefHeight="155.0" prefWidth="273.0">
+      <Label fx:id="paymentMethod" layoutX="375.0" layoutY="141.0" prefHeight="17.0" prefWidth="119.0" text="Payment method" />
+      <ListView layoutX="373.0" layoutY="170.0" prefHeight="200.0" prefWidth="200.0" />
+      <TableView id="orderTable" layoutX="66.0" layoutY="207.0" prefHeight="155.0" prefWidth="273.0">
         <columns>
-          <TableColumn id="pizzaTypeCol" prefWidth="123.0" text="Pizza Type" />
-          <TableColumn id="dateCol" minWidth="0.0" prefWidth="55.0" text="Date" />
-            <TableColumn id="tipCol" minWidth="0.0" prefWidth="39.0" text="Tip" />
-            <TableColumn id="dateCol" minWidth="0.0" prefWidth="58.0" text="Total" />
+          <TableColumn fx:id="pizzaTypeCol" prefWidth="123.0" text="Pizza Type" />
+          <TableColumn fx:id="dateCol" minWidth="0.0" prefWidth="55.0" text="Date" />
+            <TableColumn fx:id="tipCol" minWidth="0.0" prefWidth="39.0" text="Tip" />
+            <TableColumn fx:id="totalCol" minWidth="0.0" prefWidth="58.0" text="Total" />
         </columns>
       </TableView>
-      <Label fx:id="nameLabel" layoutX="108.0" layoutY="106.0" prefHeight="17.0" prefWidth="130.0" text="Name" />
-      <Label fx:id="phoneLabel" layoutX="108.0" layoutY="122.0" prefHeight="17.0" prefWidth="130.0" text="PhoneNumber" />
-      <Label fx:id="contactInformation" layoutX="90.0" layoutY="65.0" prefHeight="41.0" prefWidth="190.0" styleClass="section-header" text="Contact Information" />
-      <Label fx:id="addressLabel" layoutX="108.0" layoutY="139.0" prefHeight="17.0" prefWidth="130.0" text="Address" />
-      <Button layoutX="375.0" layoutY="81.0" mnemonicParsing="false" text="Edit" />
-      <Button fx:id="back" layoutX="1.0" layoutY="78.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="82.0" text="Back" />
-      <Label fx:id="orderHistory" layoutX="68.0" layoutY="166.0" prefHeight="17.0" prefWidth="175.0" text="Order History">
+      <Label fx:id="nameLabel" layoutX="89.0" layoutY="123.0" prefHeight="18.0" prefWidth="246.0" text="Name" />
+      <Label fx:id="phoneLabel" layoutX="89.0" layoutY="139.0" prefHeight="18.0" prefWidth="246.0" text="PhoneNumber" />
+      <Label fx:id="contactInformation" layoutX="90.0" layoutY="82.0" prefHeight="41.0" prefWidth="190.0" styleClass="section-header" text="Contact Information" />
+      <Label fx:id="addressLabel" layoutX="89.0" layoutY="156.0" prefHeight="18.0" prefWidth="246.0" text="Address" />
+      <Button layoutX="375.0" layoutY="98.0" mnemonicParsing="false" text="Edit" />
+      <Button fx:id="back" layoutX="1.0" layoutY="95.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="82.0" text="Back" />
+      <Label fx:id="orderHistory" layoutX="68.0" layoutY="183.0" prefHeight="17.0" prefWidth="175.0" text="Order History">
          <font>
             <Font size="17.0" />
          </font></Label>
-      <Label fx:id="profileLabel" layoutX="23.0" layoutY="36.0" prefHeight="17.0" prefWidth="119.0" styleClass="page-title" text="Profile" />
+      <Label fx:id="profileLabel" layoutX="23.0" layoutY="46.0" prefHeight="17.0" prefWidth="119.0" styleClass="page-title" text="Profile" />
+      <Pane layoutX="-5.0" layoutY="-6.0" prefHeight="49.0" prefWidth="606.0" styleClass="header-background">
+         <children>
+            <Button layoutY="13.0" mnemonicParsing="false" onAction="#onMenu" styleClass="nav-button" text="Menu" />
+            <Button layoutX="53.0" layoutY="13.0" mnemonicParsing="false" onAction="#onCart" prefHeight="18.0" prefWidth="70.0" styleClass="nav-button" text="Cart" />
+            <Label layoutX="60.0" layoutY="21.0" prefHeight="18.0" prefWidth="17.0" styleClass="header-text" text="|" textFill="WHITE" />
+            <Button layoutX="387.0" layoutY="16.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" styleClass="nav-button" text="Logout" />
+            <Label fx:id="headerNameLabel" layoutX="481.0" layoutY="24.0" styleClass="header-text" text="Customer Name" />
+         </children>
+      </Pane>
    </children>
-</Pane>
+</AnchorPane>
