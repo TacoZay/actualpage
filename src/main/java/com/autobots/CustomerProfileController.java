@@ -14,6 +14,7 @@ import javafx.beans.binding.Bindings;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import java.io.IOException;
 
 public class CustomerProfileController {
 
@@ -59,6 +60,12 @@ public class CustomerProfileController {
     private void onLogout() {
         //Clear user session if needed
         // App.setRoot("primary");
+    }
+
+    @FXML
+    private void onBack() throws IOException {
+        Driver.setRoot("primary");
+        System.out.println("Navigate to previous page...");
     }
 
 
@@ -118,9 +125,9 @@ public class CustomerProfileController {
 
     void loadCustomerData(Customer customer){
         this.currentCustomer = customer;
-        nameLabel.textProperty().bind(Bindings.concat("Name: ", customer.nameProperty()));
-        phoneLabel.textProperty().bind(Bindings.concat("Phone: ", customer.phoneProperty()));
-        addressLabel.textProperty().bind(Bindings.concat("Address: ", customer.addressProperty()));
+        nameLabel.textProperty().bind(customer.nameProperty());
+        phoneLabel.textProperty().bind(customer.phoneProperty());
+        addressLabel.textProperty().bind(customer.addressProperty());
     }
 
 }
