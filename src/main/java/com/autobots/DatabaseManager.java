@@ -50,4 +50,55 @@ public class DatabaseManager {
             
             return null;
     }
+    
+    /*Note: This will assume the address is formatted as "Street, City, State Zip" */
+    public boolean updateCustomer(Customer customer){
+
+        //1. update the name
+        String updateCustomerSQL = "Update Customer SET name = ? WHERE phoneNumber = ?";
+
+        //2. Update the address( the string needs to split)
+        String updateAddressSQL = "UPDATE Address SET streetAdress = ?, city = ?, state = ?, zip = ?"+
+                                    "WHERE customer_id = (SELECT customer_id FROM Customer WHERE phoneNumber = ?)";
+
+        try(Connection conn = getConnection()){
+            try(PreparedStatement pstmt1 = conn.prepareStatement(updateCustomerSQL)){
+                pstmt1.setString(1, customer.nameProperty().get());
+                pstmt1.setString(2, customer.phoneProperty().get());
+                pstmt1.executeUpdate();
+            }
+
+            // --- This will execute the Address update
+            String rawAddress = customer.addressProperty().get();
+            String[] parts = rawAddress.split(",");                 //splits the address by commas
+
+            if (parts.length >= 2) {
+                String street = parts[0].trim();
+                String city = parts[1].trim();
+
+                //State and Zip are sometimes stuck together
+                String stateZip = (parts.length > 2) ? parts[2].trim() : "";
+
+                String state = stateZip.split(" ")[0];
+                String zip = stateZip.contains(" ") ? stateZip.substring(stateZip.indexOf(" ") + 1) : "";
+                
+                try(PreparedStatement pstmt2 = conn.prepareStatement(updateAddressSQL)){
+                    pstmt2.setString(1, street);
+                    pstmt2.setString(2, city);
+                    pstmt2.setString(3, state);
+                    pstmt2.setString(4, zip);
+                    pstmt2.setString(5, customer.phoneProperty().get());
+                    pstmt2.executeUpdate();
+                }
+            }
+
+            System.out.println("Customer updated successfully");
+            return true;
+
+        }catch(SQLException e){
+            e.printStackTrace();
+            System.out.println("Error updating customer: " +e.getMessage());
+            return false;
+        }
+    }
 }
