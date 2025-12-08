@@ -46,3 +46,15 @@
      INSERT INTO Customer(name, phoneNumber) VALUES ('Xavier Terry', '578-311-4000');
      INSERT INTO Address(customer_id, streetAddress, city, state, zip)
      VALUES (1, '4321 Street St', 'Marietta', 'GA', '30060');
+
+     To configure the app, open the DatabaseManager.java, then update the USER and PASSWORD fields to match your MySQL credentials.
+
+  **How to run
+  1. Open the project folder in VS Code
+  2. Open the Maven sidebar panel on the lefthand side of the page
+  3. Go to Plugins > javafx > javafx:run
+  4. Right-click and select run or press the play button
+ 
+**Notes for Team members
+- If you see "Error determining type" run mvn clean to clear the cache
+- Ensure your MySQL server is running on port 3306 before starting the app
