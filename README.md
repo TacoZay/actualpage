@@ -17,4 +17,32 @@
   - Visual Studio Code
  
   **Database Setup
-  
+  This application needs MySQL database to work properly
+  1. Download & install MySQL Workbench
+  2. Open your MySQL Workbench
+  3. Run the following SQL script to create the required database and tables:
+     **SQL**
+     CREATE DATABASE pizza_db;
+
+     -- Create Customer Table
+     CREATE TABLE Customer (
+      customer_id INT AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(100),
+      phoneNumber VARCHAR(20) UNIQUE
+     );
+
+     -- Create Address Table
+     CREATE TABLE Address (
+      address_id INT AUTO_INCREMENT PRIMARY KEY,
+     customer_id INT,
+     streetAddress VARCHAR(255),
+     city VARCHAR(100),
+     state VARCHAR(50),
+     zip VARCHAR(20),
+     FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
+     );
+
+     -- Insert Dummy Data
+     INSERT INTO Customer(name, phoneNumber) VALUES ('Xavier Terry', '578-311-4000');
+     INSERT INTO Address(customer_id, streetAddress, city, state, zip)
+     VALUES (1, '4321 Street St', 'Marietta', 'GA', '30060');
