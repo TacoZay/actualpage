@@ -5,7 +5,7 @@
 **Features
 - A responsive UI: The layout adapts to different window sizes using a Grid system
 - Profile management: view and edit customer details
-- Order History: View past orers including the pizza type, date, tip, and total
+- Order History: View past orders including the pizza type, date, tip, and total
 - Database Integration: Retrieves and updates customer data directly from a MySQL database
 - Navigation: Includes a top navigation bar for Menu, Cart, and Logout functionality
 
