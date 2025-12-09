@@ -178,4 +178,28 @@ public class DatabaseManager {
                 e.printStackTrace();
              }
     }
+
+    //--- ORDER TRANSACTIONS
+
+    public boolean createOrder(String phoneNumber, String pizzaType, double price, double tip){
+        String sql = "INSERT INTO Orders (customer_id, pizzaType, price, tip, total) " +
+                     "VALUES ((SELECT customer_id FROM Customer WHERE phoneNumber = ?), ?, ?, ?,?)";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+                double total = price + tip;
+                pstmt.setString(1, phoneNumber);
+                pstmt.setString(2, pizzaType);
+                pstmt.setDouble(3, price);
+                pstmt.setDouble(4, tip);
+
+                pstmt.executeUpdate();
+                return true;
+             } catch(SQLException e){
+                e.printStackTrace();
+                System.out.println("Error: "+e.getMessage());
+                return false;
+             }
+    }
 }
