@@ -1,26 +1,28 @@
 package com.autobots;
 
-import com.autobots.Customer;
-import com.autobots.Order;
-
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableView;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.beans.binding.Bindings;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
+
+import javafx.beans.binding.Bindings;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 public class CustomerProfileController {
+    
+    
+    private Customer currentCustomer;
+    private String originalPhoneNumber;
+
 
     @FXML private AnchorPane rootPane;
     @FXML private Label profileLabel;
+    @FXML private Label headerNameLabel;
 
     //Contact Info
     @FXML
@@ -120,8 +122,11 @@ public class CustomerProfileController {
 
             //Send to Database
             DatabaseManager db = new DatabaseManager();
-            db.updateCustomer(currentCustomer);
+            boolean success = db.updateCustomer(currentCustomer, originalPhoneNumber);
 
+            if(success){
+                originalPhoneNumber = currentCustomer.phoneProperty().get();
+            }
 
             toggleVisibility(false);
             editButton.setText("Edit");
@@ -139,7 +144,7 @@ public class CustomerProfileController {
         phoneLabel.setVisible(!isEditing);
         addressLabel.setVisible(!isEditing);
     }
-    private Customer currentCustomer;
+    
 
     @FXML
     public void initialize(){      
@@ -149,18 +154,28 @@ public class CustomerProfileController {
         tipCol.setCellValueFactory(cellData -> cellData.getValue().tipProperty());
         totalCol.setCellValueFactory(cellData -> cellData.getValue().totalProperty());
 
-        //This is the placeholder data (needs to be actual data later)
-        Customer mockCustomer = new Customer("Xavier Terry", "578-311-4000", "4321 Street St, Marietta, GA");
-        loadCustomerData(mockCustomer);
+        // --- Database loading
+        DatabaseManager db = new DatabaseManager();
+        Customer dbCustomer = db.getCustomer("578-311-4000");
+
+        if (dbCustomer != null){
+            loadCustomerData(dbCustomer);
+        } else { 
+            System.out.println("Customer is not found!");
+        }
     }
 
 
     // --- Helper Methods ---
     void loadCustomerData(Customer customer){
         this.currentCustomer = customer;
+
+        this.originalPhoneNumber = customer.phoneProperty().get();
+
         nameLabel.textProperty().bind(customer.nameProperty());
         phoneLabel.textProperty().bind(customer.phoneProperty());
         addressLabel.textProperty().bind(customer.addressProperty());
+        headerNameLabel.textProperty().bind(customer.nameProperty());
     }
 
 

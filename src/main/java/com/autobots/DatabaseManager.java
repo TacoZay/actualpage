@@ -21,7 +21,7 @@ public class DatabaseManager {
         String query  = "SELECT " + 
                         "   c.name, " + 
                         "   c.phoneNumber, " + 
-                        "   CONCAT(a.streetAddress, ', ', a.city, ', ', a.state, ' ', a.zip) AS full_address" +
+                        "   CONCAT(a.streetAddress, ', ', a.city, ', ', a.state, ' ', a.zip) AS full_address " +
                         "FROM Customer c " +
                         "LEFT JOIN Address a ON c.customer_id = a.customer_id " + 
                         "WHERE c.phoneNumber = ?";
@@ -52,19 +52,22 @@ public class DatabaseManager {
     }
     
     /*Note: This will assume the address is formatted as "Street, City, State Zip" */
-    public boolean updateCustomer(Customer customer){
+    public boolean updateCustomer(Customer customer, String originalPhone){
 
-        //1. update the name
-        String updateCustomerSQL = "Update Customer SET name = ? WHERE phoneNumber = ?";
+        //1. update the name & Phone number
+        String updateCustomerSQL = "Update Customer SET name = ?, phoneNumber = ? WHERE phoneNumber = ?";
 
         //2. Update the address( the string needs to split)
-        String updateAddressSQL = "UPDATE Address SET streetAdress = ?, city = ?, state = ?, zip = ?"+
+        String updateAddressSQL = "UPDATE Address SET streetAddress = ?, city = ?, state = ?, zip = ? "+
                                     "WHERE customer_id = (SELECT customer_id FROM Customer WHERE phoneNumber = ?)";
 
         try(Connection conn = getConnection()){
+
+            // --- Update the Customer Table
             try(PreparedStatement pstmt1 = conn.prepareStatement(updateCustomerSQL)){
                 pstmt1.setString(1, customer.nameProperty().get());
                 pstmt1.setString(2, customer.phoneProperty().get());
+                pstmt1.setString(3, originalPhone);
                 pstmt1.executeUpdate();
             }
 

@@ -2,7 +2,7 @@ module com.autobots {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
-    //requires com.mysql.cj;
+    requires mysql.connector.j;
     
 
     opens com.autobots to javafx.fxml;
