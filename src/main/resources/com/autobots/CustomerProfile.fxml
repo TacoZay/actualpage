@@ -113,8 +113,8 @@
                   <HBox spacing="10.0">
                      <children>
                         
-                        <Button text="Add Card" />
-                        <Button text="Delete" />
+                        <Button text="Add Card" onAction="#onAddCard" />
+                        <Button text="Delete" onAction="#onDeleteCard" />
                      </children>
                   </HBox>
                </children>

@@ -104,4 +104,78 @@ public class DatabaseManager {
             return false;
         }
     }
+
+    //--- Payment method features
+
+    public java.util.List<PaymentCard> getPaymentMethods(String phoneNumber){
+        java.util.List<PaymentCard> cards = new java.util.ArrayList<>();
+        
+        //Select ALL columns now
+        String sql = "SELECT cardNumber, cardHolder, expiration, cvv FROM PaymentMethods " +
+                        "WHERE customer_id = (SELECT customer_id FROM Customer WHERE phoneNumber = ?)";
+        
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, phoneNumber);
+            ResultSet rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+                cards.add(new PaymentCard(
+                    rs.getString("cardNumber"), 
+                    rs.getString("cardHolder"),
+                    rs.getString("expiration"),
+                    rs.getString("cvv")));
+            }
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+            return cards;
+    }
+
+    public String addPaymentMethod(String phoneNumber, String newCard, String holder, String exp, String cvv){
+        String countSql = "SELECT COUNT(*) FROM PaymentMethods " +
+                            "WHERE customer_id = (SELECT customer_id FROM Customer WHERE phoneNumber = ?)";
+
+        String insertSql = "INSERT INTO PaymentMethods (customer_id, cardNumber, cardHolder, expiration, cvv) " +
+                            "VALUES ((SELECT customer_id FROM Customer WHERE phoneNumber = ?), ?, ?, ?, ?)";
+
+        try(Connection conn = getConnection()){
+            //Check count
+            try(PreparedStatement pstmt = conn.prepareStatement(countSql)){
+                pstmt.setString(1, phoneNumber);
+                ResultSet rs = pstmt.executeQuery();
+                if(rs.next() && rs.getInt(1) >= 3){
+                    return "Maximum of 3 cards allowed.";
+                }
+            }
+
+            //Add card
+            try(PreparedStatement pstmt = conn.prepareStatement(insertSql)){
+                pstmt.setString(1, phoneNumber);
+                pstmt.setString(2, newCard);
+                pstmt.setString(3, holder);
+                pstmt.setString(4, exp);
+                pstmt.setString(5, cvv);
+                pstmt.executeUpdate();
+                return "Success";
+            }
+        }  catch(SQLException e){
+            e.printStackTrace();
+            return "Database Error: " + e.getMessage();
+        }    
+    }
+
+    public void deletePaymentMethod(String phoneNumber, String cardToDelete){
+        String sql = "DELETE FROM PaymentMethods " +
+                     "WHERE cardNumber = ? AND customer_id = (SELECT customer_id FROM Customer WHERE phoneNumber = ?)";
+
+        try(Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, cardToDelete);
+            pstmt.setString(2, phoneNumber);
+            pstmt.executeUpdate();
+             }catch(SQLException e){
+                e.printStackTrace();
+             }
+    }
 }

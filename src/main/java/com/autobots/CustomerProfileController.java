@@ -1,9 +1,13 @@
 package com.autobots;
 
 import java.io.IOException;
+import java.util.List;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +16,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class CustomerProfileController {
     
@@ -45,7 +51,7 @@ public class CustomerProfileController {
     private TableColumn<Order, String> totalCol;
 
     @FXML
-    private ListView<String> paymentList;
+    private ListView<PaymentCard> paymentList;
 
     /* --- Navigation Controls ---  */
     @FXML
@@ -69,6 +75,44 @@ public class CustomerProfileController {
     private void onBack() throws IOException {
         Driver.setRoot("primary");
         System.out.println("Navigate to previous page...");
+    }
+
+    @FXML
+    private void onAddCard(){
+       try{
+        //Loads the new FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddCard.fxml"));
+        Parent root = loader.load();
+
+        //Pass the data to the new controller
+        AddCardController popupController = loader.getController();
+        popupController.setCustomerInfo(originalPhoneNumber, this);
+
+        //Create and show the new window
+        Stage stage = new Stage();
+        stage.setTitle("Add Payment Method");
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+
+       }catch(IOException e){
+        e.printStackTrace();
+        System.out.println("Error: " + e.getMessage());
+       }
+
+    }
+
+    @FXML
+    private void onDeleteCard(){
+        PaymentCard selected = paymentList.getSelectionModel().getSelectedItem();
+        if(selected == null ){
+            showAlert("Selection Error", "Please select a card to delete.");
+            return;
+        }
+
+        DatabaseManager db = new DatabaseManager();
+        db.deletePaymentMethod(originalPhoneNumber, selected.getNumber());
+        loadPaymentMethods();
     }
 
 
@@ -163,6 +207,37 @@ public class CustomerProfileController {
         } else { 
             System.out.println("Customer is not found!");
         }
+
+        // --- Custom List Cell Factory
+        //This will tell the list how to display a "PaymentCard Object"
+        paymentList.setCellFactory(param -> new javafx.scene.control.ListCell<PaymentCard>(){
+            @Override
+            protected void updateItem(PaymentCard card, boolean empty){
+                super.updateItem(card, empty);
+
+                if(empty || card == null){
+                    setText(null);
+                    setGraphic(null);
+                } else{
+                    //Creates a container for the cell
+                    javafx.scene.layout.VBox container = new javafx.scene.layout.VBox(5);
+
+                    //The Masked number
+                    Label numberLbl = new Label(card.getMaskedNumber());
+                    numberLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+
+                    //The Subtext (Name | Exp)
+                    Label detailsLbl = new Label(card.getHolder() + " | Exp: " + card.getExpiration());
+                    detailsLbl.setStyle("-fx-text-fill: #666666; -fx-font-size: 12px;");
+
+                    //add them to the container
+                    container.getChildren().addAll(numberLbl, detailsLbl);
+                    setGraphic(container);
+                }
+            }}
+            
+    
+        );
     }
 
 
@@ -175,7 +250,12 @@ public class CustomerProfileController {
         nameLabel.textProperty().bind(customer.nameProperty());
         phoneLabel.textProperty().bind(customer.phoneProperty());
         addressLabel.textProperty().bind(customer.addressProperty());
-        headerNameLabel.textProperty().bind(customer.nameProperty());
+
+        if(headerNameLabel != null){
+            headerNameLabel.textProperty().bind(customer.nameProperty());
+        }
+        
+        loadPaymentMethods();
     }
 
 
@@ -185,5 +265,11 @@ public class CustomerProfileController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void loadPaymentMethods(){
+        DatabaseManager db = new DatabaseManager();
+        List<PaymentCard> cards = db.getPaymentMethods(originalPhoneNumber);
+        paymentList.getItems().setAll(cards);
     }
 }
