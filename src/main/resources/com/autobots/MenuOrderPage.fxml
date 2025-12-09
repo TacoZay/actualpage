@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.Icon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="60.0" prefWidth="600.0" styleClass="header-background" stylesheets="@styles.css">
+         <children>
+            <Label layoutX="34.0" layoutY="6.0" prefHeight="17.0" prefWidth="120.0" styleClass="nav-button" stylesheets="@styles.css" text="Mom and Pop Pizza" />
+            <Icon content="HELP_OUTLINE" layoutX="10.0" layoutY="6.0" prefHeight="17.0" prefWidth="17.0" />
+            <HBox layoutX="-1.0" layoutY="25.0" prefHeight="35.0" prefWidth="380.0">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="nav-button" stylesheets="@styles.css" text="Home" />
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="4.0" styleClass="nav-button" stylesheets="@styles.css" text="|" />
+                  <Button mnemonicParsing="false" styleClass="nav-button" stylesheets="@styles.css" text="Pizzas" />
+                  <Label prefHeight="30.0" prefWidth="4.0" styleClass="nav-button" stylesheets="@styles.css" text="|" />
+                  <Button mnemonicParsing="false" styleClass="nav-button" stylesheets="@styles.css" text="Sides" />
+                  <Label prefHeight="30.0" prefWidth="4.0" styleClass="nav-button" stylesheets="@styles.css" text="|" />
+                  <Button mnemonicParsing="false" styleClass="nav-button" stylesheets="@styles.css" text="Beverages" />
+                  <Label prefHeight="30.0" prefWidth="4.0" styleClass="nav-button" stylesheets="@styles.css" text="|" />
+                  <Button mnemonicParsing="false" styleClass="nav-button" stylesheets="@styles.css" text="Other" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <ScrollPane layoutY="60.0" prefHeight="340.0" prefWidth="410.0" styleClass="root" stylesheets="@styles.css">
+         <content>
+            <ScrollBar nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" prefHeight="338.0" prefWidth="5.0" visibleAmount="30.0" />
+         </content>
+      </ScrollPane>
+      <AnchorPane layoutX="410.0" layoutY="60.0" prefHeight="340.0" prefWidth="190.0">
+         <children>
+            <Label layoutX="7.0" layoutY="6.0" prefHeight="44.0" prefWidth="175.0" styleClass="section-header" stylesheets="@styles.css" text="Cart" />
+            <Button layoutX="43.0" layoutY="301.0" mnemonicParsing="false" stylesheets="@styles.css" text="View Final Order" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
