@@ -56,8 +56,13 @@ public class CustomerProfileController {
     /* --- Navigation Controls ---  */
     @FXML
     private void onMenu() throws IOException {
-        System.out.println("Navigate to Menu...");
-        Driver.setRoot("Transaction");
+
+        try{
+           Driver.setRoot("MenuOrderPage");
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        
 
         //needs a way to pass the phoneNum to the new controller
     }
@@ -75,7 +80,7 @@ public class CustomerProfileController {
 
     @FXML
     private void onBack() throws IOException {
-        Driver.setRoot("primary");
+        Driver.setRoot("LandingPage");
         System.out.println("Navigate to previous page...");
     }
 

@@ -28,7 +28,7 @@ public class TransactionController {
     @FXML private ComboBox<String> pizzaCombo;
     @FXML private TextField tipInput;
 
-    private Cart cart;
+    private Cart cart = new Cart();
     private String customerPhone;
     private double currentPizzaPrice = 0.0;
 
@@ -137,6 +137,31 @@ public class TransactionController {
         stage.setScene(new Scene(root));
     }
 
+
+    //--- Navigation Controls
+
+    @FXML 
+    private void onMenu(){
+        try {
+            Driver.setRoot("MenuOrderPage");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onCart(){
+        System.out.println("Cart clicked");
+    }
+
+    @FXML
+    private void onBack(){
+        try{
+            Driver.setRoot("CustomerProfile");
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
     private void showAlert(String title, String message){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
