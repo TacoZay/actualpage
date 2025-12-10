@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -16,102 +18,162 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #F4F4F4;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.autobots.PaymentPageController">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F4F4F4;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.autobots.PaymentPageController">
    <children>
        <AnchorPane prefHeight="60.0" styleClass="header-background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-                <Button layoutX="20" layoutY="15" onAction="#onBack" styleClass="nav-button" text="&lt; Back" />
-                <Label layoutX="100" layoutY="15" style="-fx-font-size: 20px;" styleClass="header-text" text="Checkout &amp; Payment" />
-            </children>
-       </AnchorPane>
+         <children>
+             <HBox alignment="CENTER_LEFT" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
+                <children>
+                   <Button mnemonicParsing="false" onAction="#onMenu" styleClass="nav-button" text="Menu" />
+                   <Label styleClass="header-text" text="|" />
+                   <Button mnemonicParsing="false" onAction="#onBack" styleClass="nav-button" text="Back to Cart" />
+                </children>
+             </HBox>
 
-       <HBox spacing="20" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">
-           
-           <VBox prefWidth="350" spacing="15" styleClass="card-pane">
-               <Label styleClass="section-header" text="Order Summary" />
+             <HBox alignment="CENTER_RIGHT" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+                <children>
+                   <Label fx:id="headerNameLabel" styleClass="header-text" text="Guest" />
+                   <Button mnemonicParsing="false" styleClass="nav-button" text="Logout" />
+                </children>
+             </HBox>
+         </children>
+      </AnchorPane>
+
+       <VBox spacing="15.0" AnchorPane.topAnchor="80.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+           <children>
                
-               <ListView fx:id="orderSummaryList" VBox.vgrow="ALWAYS" />
-
-               <GridPane hgap="10" vgap="10">
-                   <Label text="Subtotal:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                   <Label fx:id="subtotalLabel" text="\$0.00" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-
-                   <Label text="Tax:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                   <Label fx:id="taxLabel" text="\$0.00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-                   <Label text="Tip:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                   <Label fx:id="tipAmountLabel" text="\$0.00" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-                   <Label style="-fx-font-weight: bold; -fx-font-size: 18px;" text="Total:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                   <Label fx:id="finalTotalLabel" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #2E7D32;" text="\$0.00" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-               <columnConstraints>
-                  <ColumnConstraints />
-                  <ColumnConstraints />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-               </rowConstraints>
-               </GridPane>
-
-               <Label style="-fx-font-weight: bold;" text="Add Tip:" />
-               <HBox spacing="10">
-                   <Button onAction="#addTip10" text="10%" />
-                   <Button onAction="#addTip15" text="15%" />
-                   <Button onAction="#addTip20" text="20%" />
-                   <TextField fx:id="customTipInput" onKeyTyped="#onCustomTip" prefWidth="80" promptText="Custom $" />
-               </HBox>
-           </VBox>
-
-
-           <VBox spacing="15" styleClass="card-pane" HBox.hgrow="ALWAYS">
-               <Label styleClass="section-header" text="Delivery Options" />
-               
-               <HBox spacing="20">
-                   <RadioButton fx:id="pickupRadio" onAction="#toggleDeliveryFields" selected="true" text="Pickup">
-                       <toggleGroup><ToggleGroup fx:id="orderTypeGroup" /></toggleGroup>
-                   </RadioButton>
-                   <RadioButton fx:id="deliveryRadio" onAction="#toggleDeliveryFields" text="Delivery" toggleGroup="$orderTypeGroup" />
-               </HBox>
-
-               <VBox fx:id="addressBox" managed="false" spacing="10" visible="false">
-                   <Label style="-fx-font-weight: bold;" text="Delivery Address:" />
-                   <TextField fx:id="streetInput" promptText="Street Address" />
-                   <HBox spacing="10">
-                       <TextField fx:id="cityInput" promptText="City" HBox.hgrow="ALWAYS" />
-                       <TextField fx:id="zipInput" prefWidth="100" promptText="Zip Code" />
+               <VBox alignment="CENTER" spacing="10.0">
+                   <Label text="Order Option" style="-fx-font-weight: bold; -fx-font-size: 16px;" />
+                   <HBox spacing="40" alignment="CENTER" style="-fx-padding: 15; -fx-background-color: white; -fx-background-radius: 30; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);">
+                       <RadioButton fx:id="pickupRadio" text="Carry Out" selected="true" onAction="#toggleOrderType">
+                           <toggleGroup><ToggleGroup fx:id="orderTypeGroup"/></toggleGroup>
+                       </RadioButton>
+                       <RadioButton fx:id="deliveryRadio" text="Delivery" toggleGroup="$orderTypeGroup" onAction="#toggleOrderType"/>
                    </HBox>
                </VBox>
 
-               <Separator />
-
-               <Label styleClass="section-header" text="Payment Method" />
-               
-               <HBox spacing="20">
-                   <RadioButton fx:id="cashRadio" onAction="#togglePaymentFields" selected="true" text="Cash / Pay at Counter">
-                       <toggleGroup><ToggleGroup fx:id="paymentTypeGroup" /></toggleGroup>
-                   </RadioButton>
-                   <RadioButton fx:id="cardRadio" onAction="#togglePaymentFields" text="Credit / Debit Card" toggleGroup="$paymentTypeGroup" />
-               </HBox>
-
-               <VBox fx:id="cardBox" managed="false" spacing="10" visible="false">
-                   <Label style="-fx-font-weight: bold;" text="Card Details:" />
-                   <ComboBox fx:id="savedCardsCombo" maxWidth="Infinity" onAction="#onSavedCardSelected" promptText="Select Saved Card" />
+               <HBox spacing="20" VBox.vgrow="ALWAYS">
                    
-                   <Label style="-fx-font-size: 10px; -fx-text-fill: grey;" text="Or enter new card:" />
-                   <TextField fx:id="cardNumberInput" promptText="Card Number" />
-                   <HBox spacing="10">
-                       <TextField fx:id="expInput" prefWidth="80" promptText="MM/YY" />
-                       <TextField fx:id="cvvInput" prefWidth="60" promptText="CVV" />
-                   </HBox>
-               </VBox>
+                   <VBox spacing="10" prefWidth="350" styleClass="card-pane">
+                       <Label text="Order Summary" styleClass="section-header"/>
+                       <ListView fx:id="orderSummaryList" VBox.vgrow="ALWAYS"/>
+                       <Button text="Remove Selected Item" onAction="#onRemoveItem" style="-fx-font-size: 11px; -fx-text-fill: #D32F2F;"/>
+                       
+                       <Separator/>
+                       
+                       <GridPane hgap="10" vgap="5">
+                           <columnConstraints>
+                               <ColumnConstraints percentWidth="60"/>
+                               <ColumnConstraints percentWidth="40"/>
+                           </columnConstraints>
+                           <Label text="Subtotal:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                           <Label fx:id="subtotalLabel" text="\$0.00" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                           <Label text="Taxes:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                           <Label fx:id="taxLabel" text="\$0.00" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                       </GridPane>
 
-               <Region VBox.vgrow="ALWAYS" />
-               
-               <Button maxWidth="Infinity" onAction="#onPlaceOrder" style="-fx-font-size: 18px; -fx-padding: 15;" styleClass="button-primary" text="PLACE ORDER" />
-           </VBox>
-       </HBox>
+                       <Separator/>
+
+                       <Label text="Tip:" style="-fx-font-weight: bold;"/>
+                       <HBox spacing="5">
+                           <Button text="10%" onAction="#addTip10" prefWidth="50"/>
+                           <Button text="15%" onAction="#addTip15" prefWidth="50"/>
+                           <Button text="18%" onAction="#addTip18" prefWidth="50"/>
+                           <TextField fx:id="customTipInput" promptText="Custom" prefWidth="70" onKeyTyped="#onCustomTip"/>
+                       </HBox>
+                       <Label fx:id="tipAmountLabel" text="Tip Added: $0.00" style="-fx-font-size: 12px; -fx-text-fill: gray;"/>
+
+                       <Separator/>
+
+                       <HBox spacing="10">
+                           <Label text="Final Total:" style="-fx-font-weight: bold; -fx-font-size: 18px;"/>
+                           <Label fx:id="finalTotalLabel" text="\$0.00" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #2E7D32;"/>
+                       </HBox>
+                       
+                       <HBox spacing="20" alignment="CENTER" style="-fx-padding: 10 0 0 0;">
+                           <Button text="Cancel" onAction="#onBack" styleClass="button-secondary"/>
+                           <Button text="Place Order" styleClass="button-primary" style="-fx-font-size: 16px; -fx-padding: 10 30;" onAction="#onPlaceOrder"/>
+                       </HBox>
+                       
+                   </VBox>
+
+
+                   <ScrollPane fitToWidth="true" HBox.hgrow="ALWAYS" style="-fx-background-color: transparent;">
+                       <content>
+                           <VBox spacing="15" styleClass="card-pane" style="-fx-padding: 20;">
+                               
+                               <VBox fx:id="storeInfoBox" spacing="5" style="-fx-padding: 15; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-background-color: #f9f9f9;">
+                                   <Label text="Pickup Location:" style="-fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+                                   <Label text="Mom &amp; Pop Pizza" style="-fx-font-size: 16px;"/>
+                                   <Label text="123 Flavor Street"/>
+                                   <Label text="Marietta, GA 30060"/>
+                                   <Label text="(555) 123-4567" style="-fx-text-fill: gray;"/>
+                               </VBox>
+
+                               <VBox fx:id="deliveryFormBox" spacing="10" visible="false" managed="false">
+                                   <Label text="Delivery Address" style="-fx-font-weight: bold;"/>
+                                   <TextField fx:id="streetInput" promptText="Street Line 1"/>
+                                   <TextField fx:id="street2Input" promptText="Street Line 2 (Apt, Suite)"/>
+                                   <HBox spacing="10">
+                                       <TextField fx:id="cityInput" promptText="City" HBox.hgrow="ALWAYS"/>
+                                       <TextField fx:id="stateInput" promptText="State" prefWidth="60"/>
+                                       <TextField fx:id="zipInput" promptText="Zip" prefWidth="80"/>
+                                   </HBox>
+                               </VBox>
+
+                               <Separator/>
+
+                               <Label text="Payment Options" style="-fx-font-weight: bold;"/>
+                               <HBox spacing="20">
+                                   <RadioButton fx:id="cashRadio" text="Cash / Check" selected="true" onAction="#togglePaymentFields">
+                                       <toggleGroup><ToggleGroup fx:id="paymentTypeGroup"/></toggleGroup>
+                                   </RadioButton>
+                                   <RadioButton fx:id="cardRadio" text="Credit / Debit Card" toggleGroup="$paymentTypeGroup" onAction="#togglePaymentFields"/>
+                               </HBox>
+
+                               <VBox fx:id="cardBox" spacing="15" visible="false" managed="false">
+                                   
+                                   <Label text="Billing Address" style="-fx-font-weight: bold;"/>
+                                   <CheckBox fx:id="sameAddressCheck" text="Same as Delivery Address" onAction="#toggleBillingAddress"/>
+                                   
+                                   <VBox fx:id="billingAddressBox" spacing="10">
+                                       <TextField fx:id="billingStreetInput" promptText="Billing Street Line 1"/>
+                                       <HBox spacing="10">
+                                           <TextField fx:id="billingCityInput" promptText="City" HBox.hgrow="ALWAYS"/>
+                                           <TextField fx:id="billingZipInput" promptText="Zip" prefWidth="80"/>
+                                       </HBox>
+                                   </VBox>
+
+                                   <Label text="Credit/Debit Card Details" style="-fx-font-weight: bold;"/>
+                                   <ComboBox fx:id="savedCardsCombo" promptText="Select Saved Card" maxWidth="Infinity" onAction="#onSavedCardSelected"/>
+                                   
+                                   <Label text="Or enter new card:" style="-fx-font-size: 10px; -fx-text-fill: grey;"/>
+                                   <TextField fx:id="cardNumberInput" promptText="Card Number"/>
+                                   
+                                   <HBox spacing="10">
+                                       <VBox HBox.hgrow="ALWAYS">
+                                           <Label text="Expiration" style="-fx-font-size: 12px;"/>
+                                           <TextField fx:id="expInput" promptText="MM/YY"/>
+                                       </VBox>
+                                       <VBox HBox.hgrow="ALWAYS">
+                                           <Label text="CVV" style="-fx-font-size: 12px;"/>
+                                           <TextField fx:id="cvvInput" promptText="123"/>
+                                       </VBox>
+                                   </HBox>
+                               </VBox>
+
+                               <Separator/>
+
+                               <Label text="Signature" style="-fx-font-weight: bold;"/>
+                               <TextField fx:id="signatureInput" promptText="Type Full Name to Sign"/>
+
+                               <Separator/>
+
+                               </VBox>
+                       </content>
+                   </ScrollPane>
+               </HBox>
+           </children>
+       </VBox>
    </children>
 </AnchorPane>

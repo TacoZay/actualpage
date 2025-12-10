@@ -46,7 +46,7 @@ public class PaymentPageController {
     private Cart cart;
     private double tipAmount = 0.0;
     private String customerPhone;
-
+    private java.util.List<PaymentCard> myCards;
     // --- Initialization ---
     public void setOrderData(Cart cart, String phone){
         this.cart = cart;
@@ -75,6 +75,13 @@ public class PaymentPageController {
     private void loadSavedCards() {
         DatabaseManager db = new DatabaseManager();
         
+        //1. Stores the full objects in our list
+        this.myCards = db.getPaymentMethods(customerPhone);
+
+        savedCardsCombo.getItems().clear();
+        for(PaymentCard card : myCards){
+            savedCardsCombo.getItems().add(card.getMaskedNumber());
+        }
         for(PaymentCard card : db.getPaymentMethods(customerPhone)){
             savedCardsCombo.getItems().add(card.getMaskedNumber());
         }
@@ -115,7 +122,7 @@ public class PaymentPageController {
     //--- Tip Logic ---
     @FXML private void addTip10(){setTipPercent(0.10);}
     @FXML private void addTip15(){setTipPercent(0.15);}
-    @FXML private void addTip20(){setTipPercent(0.20);}
+    @FXML private void addTip18(){setTipPercent(0.18);}
 
     private void setTipPercent(double percent){
         if(cart != null){
@@ -135,25 +142,51 @@ public class PaymentPageController {
         updateTotals();
     }
 
+    @FXML
+    private void toggleDeliveryFields(){
+        boolean isDelivery = deliveryRadio.isSelected();
+
+        if(deliveryFormBox != null){
+            deliveryFormBox.setVisible(isDelivery);
+            deliveryFormBox.setManaged(isDelivery);
+        }
+
+        if(storeInfoBox != null){
+            storeInfoBox.setVisible(!isDelivery);
+            storeInfoBox.setManaged(isDelivery);
+        }
+
+        if(!isDelivery && sameAddressCheck != null){
+            sameAddressCheck.setSelected(false);
+        }
+    }
+
+
     //--- Toggles ---
     @FXML 
     private void toggleOrderType(){
         boolean isDelivery = deliveryRadio.isSelected();
 
-        //Show Delivery Form only if delivery is selected
-        deliveryFormBox.setVisible(isDelivery);
-        deliveryFormBox.setManaged(!isDelivery);
-
-        //Show Store Info only if pickup is selected
-        storeInfoBox.setVisible(!isDelivery);
-        storeInfoBox.setManaged(!isDelivery);
-
-        //If we switch to pickup, we can uncheck "Same as delivery" logic
-        if(!isDelivery){
-            sameAddressCheck.setSelected(false);
-            toggleBillingAddress();
+        if(deliveryFormBox != null){
+            deliveryFormBox.setVisible(isDelivery);
+            deliveryFormBox.setVisible(isDelivery);
         }
 
+        if(storeInfoBox != null){
+            storeInfoBox.setVisible(!isDelivery);
+            storeInfoBox.setManaged(!isDelivery);
+        }
+
+        if(sameAddressCheck != null){
+            if(!isDelivery){
+                sameAddressCheck.setSelected(false);
+                sameAddressCheck.setDisable(true);
+            } else {
+                sameAddressCheck.setDisable(false);
+            }
+
+            toggleBillingAddress();
+        }
     }
 
     @FXML 
@@ -179,15 +212,20 @@ public class PaymentPageController {
     }
 
     @FXML
-    private void onSavedCaredSelected(){
-
+    private void onSavedCardSelected(){
+        System.out.println("Saved Card");
     }
 
     @FXML 
     private void onPlaceOrder(){
-        //Validation
+        // --- Validation ---
         if(deliveryRadio.isSelected() && streetInput.getText().isEmpty()){
             showAlert("Error", "Please enter a delivery address");
+            return;
+        }
+
+        if(signatureInput.getText().trim().isEmpty()){
+            showAlert("Error", "Please sign the order.");
             return;
         }
 
@@ -201,10 +239,17 @@ public class PaymentPageController {
         } catch (IOException e){e.printStackTrace();}
     }
 
+    //--- Navigation ---
+    @FXML
+    private void onMenu()throws IOException {
+        Driver.setRoot("MenuOrderPage");
+    }
+
     @FXML
     private void onBack() throws IOException {
         Driver.setRoot("Transaction");
     }
+
 
     private void showAlert(String title, String message){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

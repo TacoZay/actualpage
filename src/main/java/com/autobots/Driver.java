@@ -17,7 +17,7 @@ public class Driver extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("CustomerProfile"), 640, 480);
+        scene = new Scene(loadFXML("PaymentPage"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }

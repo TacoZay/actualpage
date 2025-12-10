@@ -158,6 +158,18 @@ public class CustomerProfileController {
                 return;         //Stop and don't save
             }
 
+            //Phone number validation
+            String cleanedPhone = newPhone.replaceAll("[^0-9]", "");
+
+            if(cleanedPhone.length() != 10){
+                showAlert("Invalid Phone Format", "Phone number must contain exactly 10 digits.");
+                phoneInput.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+                return;
+            }
+            
+            phoneInput.setText(cleanedPhone);
+            phoneInput.setStyle(null);
+
             //Checks the address format(must have a comma for database manager logic)
             if(!newAddress.contains(",")){
                 showAlert("Invalid Address Format", "Address must be: Street, City, State Zip");
