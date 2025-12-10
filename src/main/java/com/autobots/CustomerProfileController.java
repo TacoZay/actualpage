@@ -55,9 +55,11 @@ public class CustomerProfileController {
 
     /* --- Navigation Controls ---  */
     @FXML
-    private void onMenu(){
+    private void onMenu() throws IOException {
         System.out.println("Navigate to Menu...");
-        //App.setRoot("menu");
+        Driver.setRoot("Transaction");
+
+        //needs a way to pass the phoneNum to the new controller
     }
 
     @FXML

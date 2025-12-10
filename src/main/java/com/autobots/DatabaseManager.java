@@ -193,6 +193,7 @@ public class DatabaseManager {
                 pstmt.setString(2, pizzaType);
                 pstmt.setDouble(3, price);
                 pstmt.setDouble(4, tip);
+                pstmt.setDouble(5, total);
 
                 pstmt.executeUpdate();
                 return true;
