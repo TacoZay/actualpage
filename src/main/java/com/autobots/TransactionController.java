@@ -6,17 +6,29 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class TransactionController {
+    
+    @FXML private TableView<MenuItem> cartTable;
+    @FXML private TableColumn<MenuItem, String> itemCol;
+    @FXML private TableColumn<MenuItem, Number> priceCol;
+
+    @FXML private Label subtotalLabel;
+    @FXML private Label taxLabel;
+    @FXML private Label totalLabel;
+    @FXML private ComboBox<String> paymentCombo;
     @FXML private ComboBox<String> pizzaCombo;
     @FXML private TextField tipInput;
-    @FXML private ComboBox<String> paymentCombo;
-    @FXML private Label totalLabel;
 
+    private Cart cart;
     private String customerPhone;
     private double currentPizzaPrice = 0.0;
 
@@ -27,7 +39,28 @@ public class TransactionController {
 
     @FXML
     public void initialize(){
-        pizzaCombo.getItems().addAll("Cheese ($10.00)", "Pepperoni ($12.00)", "Veggie ($15.00)");
+        itemCol.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getName()));
+        priceCol.setCellValueFactory(cell -> new javafx.beans.property.SimpleDoubleProperty(cell.getValue().getTotalPrice()));
+
+        cartTable.setItems(cart.getItems());
+    }
+
+    // --- Menu Actions ---
+    @FXML void addCheese(){ addToCart("Cheese Pizza", 10.00);}
+    @FXML void addPep(){ addToCart("Pepperoni Pizza", 12.00);}
+    @FXML void addVeg(){ addToCart("Veggie Pizza", 15.00);}
+    @FXML void addSoda(){ addToCart("Soda Pizza", 2.00);}
+
+    private void addToCart(String name, double price){
+        cart.addItem(name, price);
+        updateTotals();
+    }
+
+    private void updateTotals(){
+        subtotalLabel.setText(String.format("$%.2f", cart.getSubtotal()));
+        taxLabel.setText(String.format("$%.2f", cart.getTax()));
+        totalLabel.setText(String.format("$%.2f", cart.getTotal()));
+
     }
 
     private void loadPaymentMethods(){
@@ -96,6 +129,12 @@ public class TransactionController {
     private void onCheckout() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PaymentPage.fxml"));
         Parent root = loader.load();
+
+        PaymentPageController controller = loader.getController();
+        controller.setOrderData(this.cart, this.customerPhone);
+
+        Stage stage = (Stage) cartTable.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
     private void showAlert(String title, String message){
