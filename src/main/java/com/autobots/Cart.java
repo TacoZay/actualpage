@@ -7,6 +7,9 @@ public class Cart {
     //the Observablelist will allow the UI Table to automatically update when items are added
     private ObservableList<MenuItem> items = FXCollections.observableArrayList();
 
+    private static Cart instance = new Cart();
+    
+
     public ObservableList<MenuItem> getItems(){return items;}
 
     public void addItem(String name, double price){
@@ -27,5 +30,9 @@ public class Cart {
 
     public double getTotal(){
         return getSubtotal() + getTax();
+    }
+    
+    public static Cart getInstance(){
+        return instance;
     }
 }

@@ -1,45 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.Icon?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F4F4F4;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.autobots.MenuOrderPageController">
    <children>
-      <AnchorPane prefHeight="60.0" prefWidth="600.0" styleClass="header-background" stylesheets="@styles.css">
+      
+      <AnchorPane prefHeight="60.0" styleClass="header-background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="34.0" layoutY="6.0" prefHeight="17.0" prefWidth="120.0" styleClass="nav-button" stylesheets="@styles.css" text="Mom and Pop Pizza" />
-            <Icon content="HELP_OUTLINE" layoutX="10.0" layoutY="6.0" prefHeight="17.0" prefWidth="17.0" />
-            <HBox layoutX="-1.0" layoutY="25.0" prefHeight="35.0" prefWidth="380.0">
-               <children>
-                  <Button mnemonicParsing="false" styleClass="nav-button" stylesheets="@styles.css" text="Home" />
-                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="4.0" styleClass="nav-button" stylesheets="@styles.css" text="|" />
-                  <Button mnemonicParsing="false" styleClass="nav-button" stylesheets="@styles.css" text="Pizzas" />
-                  <Label prefHeight="30.0" prefWidth="4.0" styleClass="nav-button" stylesheets="@styles.css" text="|" />
-                  <Button mnemonicParsing="false" styleClass="nav-button" stylesheets="@styles.css" text="Sides" />
-                  <Label prefHeight="30.0" prefWidth="4.0" styleClass="nav-button" stylesheets="@styles.css" text="|" />
-                  <Button mnemonicParsing="false" styleClass="nav-button" stylesheets="@styles.css" text="Beverages" />
-                  <Label prefHeight="30.0" prefWidth="4.0" styleClass="nav-button" stylesheets="@styles.css" text="|" />
-                  <Button mnemonicParsing="false" styleClass="nav-button" stylesheets="@styles.css" text="Other" />
-               </children>
-            </HBox>
+             <HBox alignment="CENTER_LEFT" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
+                <children>
+                   <Button mnemonicParsing="false" styleClass="nav-button" text="Home" onAction="#onHome"/>
+                   <Label styleClass="header-text" text="|" />
+                   <Label styleClass="header-text" text="Menu" />
+                </children>
+             </HBox>
+
+             <HBox alignment="CENTER_RIGHT" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+                <children>
+                   <Label styleClass="header-text" text="Guest" />
+                   <Button mnemonicParsing="false" styleClass="nav-button" text="Logout" onAction="#onLogout"/>
+                </children>
+             </HBox>
          </children>
       </AnchorPane>
-      <ScrollPane layoutY="60.0" prefHeight="340.0" prefWidth="410.0" styleClass="root" stylesheets="@styles.css">
-         <content>
-            <ScrollBar nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" prefHeight="338.0" prefWidth="5.0" visibleAmount="30.0" />
-         </content>
-      </ScrollPane>
-      <AnchorPane layoutX="410.0" layoutY="60.0" prefHeight="340.0" prefWidth="190.0">
-         <children>
-            <Label layoutX="7.0" layoutY="6.0" prefHeight="44.0" prefWidth="175.0" styleClass="section-header" stylesheets="@styles.css" text="Cart" />
-            <Button layoutX="43.0" layoutY="301.0" mnemonicParsing="false" stylesheets="@styles.css" text="View Final Order" />
-         </children>
-      </AnchorPane>
+
+      <HBox spacing="20" AnchorPane.topAnchor="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+          
+          <VBox HBox.hgrow="ALWAYS" spacing="10" style="-fx-padding: 20;">
+              
+              <HBox spacing="10">
+                  <Button text="Pizzas" styleClass="button-primary"/>
+                  <Button text="Sides" styleClass="button"/>
+                  <Button text="Beverages" styleClass="button"/>
+              </HBox>
+              
+              <Separator />
+
+              <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+                  <content>
+                      <GridPane hgap="20" vgap="20" style="-fx-padding: 10;">
+                          <columnConstraints>
+                              <ColumnConstraints percentWidth="33" />
+                              <ColumnConstraints percentWidth="33" />
+                              <ColumnConstraints percentWidth="33" />
+                          </columnConstraints>
+                          
+                          <VBox styleClass="card-pane" alignment="CENTER" spacing="10" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                              <Label text="Cheese Pizza" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                              <Label text="$10.00" styleClass="price-text"/>
+                              <Button text="Add to Order" onAction="#addCheese"/>
+                          </VBox>
+
+                          <VBox styleClass="card-pane" alignment="CENTER" spacing="10" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                              <Label text="Pepperoni Pizza" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                              <Label text="$12.00" styleClass="price-text"/>
+                              <Button text="Add to Order" onAction="#addPep"/>
+                          </VBox>
+
+                          <VBox styleClass="card-pane" alignment="CENTER" spacing="10" GridPane.rowIndex="0" GridPane.columnIndex="2">
+                              <Label text="Veggie Pizza" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                              <Label text="$15.00" styleClass="price-text"/>
+                              <Button text="Add to Order" onAction="#addVeg"/>
+                          </VBox>
+                          
+                          <VBox styleClass="card-pane" alignment="CENTER" spacing="10" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                              <Label text="2L Soda" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                              <Label text="$2.00" styleClass="price-text"/>
+                              <Button text="Add to Order" onAction="#addSoda"/>
+                          </VBox>
+
+                      </GridPane>
+                  </content>
+              </ScrollPane>
+          </VBox>
+
+          <VBox prefWidth="300" style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, -5, 0);">
+              <children>
+                  <Label text="Your Order" styleClass="section-header" style="-fx-padding: 20 20 10 20;"/>
+                  
+                  <ListView fx:id="miniCartList" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent;"/>
+                  
+                  <VBox spacing="10" style="-fx-padding: 20; -fx-background-color: #FAFAFA; -fx-border-color: #ddd; -fx-border-width: 1 0 0 0;">
+                      <HBox>
+                          <Label text="Subtotal:" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                          <Label fx:id="subtotalLabel" text="$0.00" style="-fx-font-weight: bold;"/>
+                      </HBox>
+                      <Button text="View Final Order" maxWidth="Infinity" styleClass="button-primary" style="-fx-padding: 15;" onAction="#onViewOrder"/>
+                  </VBox>
+              </children>
+          </VBox>
+
+      </HBox>
    </children>
 </AnchorPane>
