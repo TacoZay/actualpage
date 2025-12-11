@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.autobots.CartController"
+            stylesheets="@styles.css"
+            prefWidth="900" prefHeight="520">
+
+    <Label text="Your Order"
+           layoutX="380" layoutY="20"
+           style="-fx-font-size: 26px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="cartTable"
+               layoutX="25" layoutY="70"
+               prefWidth="850" prefHeight="300">
+
+        <columns>
+
+            <TableColumn fx:id="nameColumn"
+                         text="Pizza"
+                         prefWidth="200" />
+
+            <TableColumn fx:id="qtyColumn"
+                         text="Qty"
+                         prefWidth="60" />
+
+            <!-- Edit pizza -->
+            <TableColumn fx:id="editColumn"
+                         text="Edit"
+                         prefWidth="80" />
+
+            <!-- Remove pizza -->
+            <TableColumn fx:id="removeColumn"
+                         text="Remove"
+                         prefWidth="100" />
+
+            <TableColumn fx:id="priceColumn"
+                         text="Price"
+                         prefWidth="120" />
+
+        </columns>
+
+    </TableView>
+
+    <!-- Buttons -->
+    <Button text="Add Item"
+            layoutX="25" layoutY="390"
+            prefWidth="180"
+            onAction="#onAddMoreClicked" />
+
+    <Button text="Checkout"
+            layoutX="695" layoutY="390"
+            prefWidth="180"
+            onAction="#onCheckoutClicked" />
+
+    <Button text="Back"
+            layoutX="25" layoutY="440"
+            prefWidth="180"
+            onAction="#onBackClicked" />
+
+</AnchorPane>
