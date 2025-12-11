@@ -59,25 +59,25 @@
                           
                           <VBox styleClass="card-pane" alignment="CENTER" spacing="10" GridPane.rowIndex="0" GridPane.columnIndex="0">
                               <Label text="Cheese Pizza" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
-                              <Label text="$10.00" styleClass="price-text"/>
+                              <Label text="10.00" styleClass="price-text"/>
                               <Button text="Add to Order" onAction="#addCheese"/>
                           </VBox>
 
                           <VBox styleClass="card-pane" alignment="CENTER" spacing="10" GridPane.rowIndex="0" GridPane.columnIndex="1">
                               <Label text="Pepperoni Pizza" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
-                              <Label text="$12.00" styleClass="price-text"/>
+                              <Label text="12.00" styleClass="price-text"/>
                               <Button text="Add to Order" onAction="#addPep"/>
                           </VBox>
 
                           <VBox styleClass="card-pane" alignment="CENTER" spacing="10" GridPane.rowIndex="0" GridPane.columnIndex="2">
                               <Label text="Veggie Pizza" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
-                              <Label text="$15.00" styleClass="price-text"/>
+                              <Label text="15.00" styleClass="price-text"/>
                               <Button text="Add to Order" onAction="#addVeg"/>
                           </VBox>
                           
                           <VBox styleClass="card-pane" alignment="CENTER" spacing="10" GridPane.rowIndex="1" GridPane.columnIndex="0">
                               <Label text="2L Soda" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
-                              <Label text="$2.00" styleClass="price-text"/>
+                              <Label text="2.00" styleClass="price-text"/>
                               <Button text="Add to Order" onAction="#addSoda"/>
                           </VBox>
 
@@ -95,7 +95,7 @@
                   <VBox spacing="10" style="-fx-padding: 20; -fx-background-color: #FAFAFA; -fx-border-color: #ddd; -fx-border-width: 1 0 0 0;">
                       <HBox>
                           <Label text="Subtotal:" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
-                          <Label fx:id="subtotalLabel" text="$0.00" style="-fx-font-weight: bold;"/>
+                          <Label fx:id="subtotalLabel" text="0.00" style="-fx-font-weight: bold;"/>
                       </HBox>
                       <Button text="View Final Order" maxWidth="Infinity" styleClass="button-primary" style="-fx-padding: 15;" onAction="#onViewOrder"/>
                   </VBox>
