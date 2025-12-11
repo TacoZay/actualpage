@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.autobots.LoginController"
+            stylesheets="@styles.css"
+            prefWidth="600" prefHeight="400">
+
+    <Label text="Sign In"
+           layoutX="255" layoutY="40"
+           style="-fx-font-size: 26px; -fx-font-weight: bold;"/>
+
+    <Label text="Phone Number:" layoutX="150" layoutY="130"/>
+    <TextField fx:id="phoneField" layoutX="260" layoutY="125" prefWidth="200"/>
+
+    <Label text="Password:" layoutX="150" layoutY="180"/>
+    <PasswordField fx:id="passwordField" layoutX="260" layoutY="175" prefWidth="200"/>
+
+    <Button text="Sign In"
+            layoutX="260" layoutY="230"
+            prefWidth="200"
+            onAction="#onSignInClicked"/>
+
+    <Label fx:id="errorLabel"
+           textFill="red"
+           layoutX="260" layoutY="275"
+           visible="false"/>
+
+    <Button text="Create Account"
+            layoutX="260" layoutY="310"
+            prefWidth="200"
+            onAction="#onGoToCreateClicked"/>
+
+</AnchorPane>

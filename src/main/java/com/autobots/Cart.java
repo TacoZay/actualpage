@@ -4,7 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Cart {
-    //the Observablelist will allow the UI Table to automatically update when items are added
+
     private ObservableList<MenuItem> items = FXCollections.observableArrayList();
 
     private static Cart instance = new Cart();
@@ -12,8 +12,12 @@ public class Cart {
 
     public ObservableList<MenuItem> getItems(){return items;}
 
-    public void addItem(String name, double price){
-        items.add(new MenuItem(name, price, 1));
+    public void addItem(MenuItem item){
+        items.add(item);
+    }
+
+    public void removeItem(MenuItem item){
+        items.remove(item);
     }
 
     public void clear(){
