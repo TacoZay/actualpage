@@ -50,6 +50,90 @@ public class DatabaseManager {
             
             return null;
     }
+
+    public boolean createCustomer(String name, String phone, String rawAddress){
+        String insertCustomer = "INSERT INTO Customer (name, phoneNumber) VALUES (?, ?)";
+        String insertAddress = "INSERT INTO Address (customer_id, streetAddress, city, state, zip) VALUES(?, ?, ?, ? ?)";
+
+        Connection conn = null;
+        PreparedStatement pstmt1 = null;
+        PreparedStatement pstmt2 = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+            conn.setAutoCommit(false);
+
+            //Inserts customer
+            pstmt1 = conn.prepareStatement(insertCustomer, java.sql.Statement.RETURN_GENERATED_KEYS);
+            pstmt1.setString(1, name);
+            pstmt1.setString(2, phone);
+            pstmt1.executeUpdate();
+
+            //Generates ID
+            rs = pstmt1.getGeneratedKeys();
+            int customerId = 0;
+            if(rs.next()){
+                customerId = rs.getInt(1);
+            }
+
+
+            //Parse and insert the address
+            String[] parts = rawAddress.split(",");
+            String street = (parts.length > 0) ? parts[0].trim() : rawAddress;
+            String city = (parts.length > 1 ) ? parts[1].trim() : "";
+            String state = "";
+            String zip = "";
+
+            if (parts.length > 2){
+                String stateZip = parts[2].trim();
+                String[] szParts = stateZip.split(" ");
+                if(szParts.length > 0) state = szParts[0];
+                if(szParts.length > 1) zip = szParts[1];
+            }
+
+            pstmt2 = conn.prepareStatement(insertAddress);
+            pstmt2.setInt(1, customerId);
+            pstmt2.setString(2, street);
+            pstmt2.setString(3, city);
+            pstmt2.setString(4, state);
+            pstmt2.setString(5, zip);
+            pstmt2.executeUpdate();
+
+            conn.commit();
+            return true;
+
+            
+
+        } catch(SQLException e){
+            e.printStackTrace();
+            if(conn != null){
+                try{ conn.rollback(); } catch (SQLException ex){ex.printStackTrace();}
+            }
+            return false;
+        } finally {
+            try {if(rs != null) rs.close(); if(pstmt1 != null) pstmt2.close(); if(pstmt2 != null) pstmt2.close(); if(conn != null) conn.close();} catch(SQLException e){}
+        }
+    }
+
+    //Method to Login
+    public Customer validateUser(String phone, String password){
+        String sql = "SELECT * FROM Customer WHERE phoneNumber = ? AND password = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+                pstmt.setString(1, phone);
+                pstmt.setString(2, password);
+                ResultSet rs = pstmt.executeQuery();
+
+                if(rs.next()){
+                    return new Customer(rs.getString("name"), rs.getString("phoneNumber"), "");
+                }
+             } catch (SQLException e ){
+                e.printStackTrace();
+             }
+             return null;       //Login failed
+    }
     
     /*Note: This will assume the address is formatted as "Street, City, State Zip" */
     public boolean updateCustomer(Customer customer, String originalPhone){

@@ -26,6 +26,12 @@ public class LandingPageController {
 
     @FXML
     private void onProfile() throws IOException {
-        Driver.setRoot("CustomerProfile");
+        if (Driver.currentUser != null) {
+            Driver.setRoot("CustomerProfile");
+        } else {
+            System.out.println("Guest cannot access profile.");
+            // Optional: Redirect to Login or show Alert
+            Driver.setRoot("Login");
+        }
     }
 }

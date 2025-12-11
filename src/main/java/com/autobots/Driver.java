@@ -15,9 +15,11 @@ public class Driver extends Application {
 
     private static Scene scene;
 
+    public static Customer currentUser = null;
+
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("LandingPage"), 1000, 700);
+        scene = new Scene(loadFXML("Login"), 1000, 700);
         stage.setScene(scene);
         stage.show();
     }

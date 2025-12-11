@@ -1,8 +1,11 @@
 package com.autobots;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 public class LoginController {
 
@@ -11,13 +14,17 @@ public class LoginController {
     @FXML private Label errorLabel;
 
     @FXML
-    private void onSignInClicked() throws Exception {
+    private void onSignInClicked() {
         String phone = phoneField.getText().trim();
         String pass = passwordField.getText().trim();
 
-        if (phone.equals("1234567890") && pass.equals("password")) {
-            Stage stage = (Stage) phoneField.getScene().getWindow();
-            Navigation.switchTo(stage, "Menu");
+        DatabaseManager db = new DatabaseManager();
+        Customer customer = db.validateUser(phone, pass);
+
+        if (customer != null) {
+            // LOGIN SUCCESS
+            Driver.currentUser = customer; // Save to global state
+            navigateToLanding();
         } else {
             errorLabel.setVisible(true);
             errorLabel.setText("Invalid phone number or password.");
@@ -25,8 +32,22 @@ public class LoginController {
     }
 
     @FXML
-    private void onGoToCreateClicked() throws Exception {
-        Stage stage = (Stage) phoneField.getScene().getWindow();
-        Navigation.switchTo(stage, "CreateAccount");
+    private void onGuestClicked() {
+        // GUEST MODE
+        Driver.currentUser = null; // Ensure it is null
+        navigateToLanding();
+    }
+
+    @FXML
+    private void onGoToCreateClicked() throws IOException {
+        Driver.setRoot("CreateAccount");
+    }
+
+    private void navigateToLanding() {
+        try {
+            Driver.setRoot("LandingPage");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

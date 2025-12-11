@@ -33,4 +33,9 @@
             prefWidth="200"
             onAction="#onGoToCreateClicked"/>
 
+        <Button text="Continue as Guest"
+            layoutX="260" layoutY="350"
+            prefWidth="200"
+            onAction="#onGuestClicked"/>  
+
 </AnchorPane>
