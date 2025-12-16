@@ -6,6 +6,8 @@ import java.util.List;
 import com.autobots.model.Customer;
 import com.autobots.model.Order;
 import com.autobots.model.PaymentCard;
+import com.autobots.util.DatabaseManager;
+import com.autobots.util.Driver;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
@@ -25,7 +27,7 @@ import javafx.stage.Stage;
 
 public class CustomerProfileController {
     
-    
+    Driver Driver = new Driver();
     private Customer currentCustomer;
     private String originalPhoneNumber;
 

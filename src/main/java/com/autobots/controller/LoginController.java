@@ -13,6 +13,8 @@ import javafx.scene.control.TextField;
 
 public class LoginController {
 
+    Driver Driver = new Driver();
+
     @FXML private TextField phoneField;
     @FXML private PasswordField passwordField;
     @FXML private Label errorLabel;

@@ -13,6 +13,8 @@ import javafx.scene.control.TextField;
 
 public class CreateAccountController {
 
+    Driver Driver = new Driver();
+
     @FXML private TextField nameField;
     @FXML private TextField phoneField;
     @FXML private TextField emailField;
@@ -100,8 +102,8 @@ public class CreateAccountController {
         }
     }
 
-    @FXML
-    private void onBackClicked() throws IOException {
-        Driver.setRoot("Login");
-    }
+    // @FXML
+    // private void onBackClicked() throws IOException {
+    //     Driver.setRoot("Login");
+    // }
 }

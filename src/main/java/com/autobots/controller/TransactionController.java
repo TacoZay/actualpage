@@ -7,6 +7,7 @@ import com.autobots.model.Cart;
 import com.autobots.model.MenuItem;
 import com.autobots.model.PaymentCard;
 import com.autobots.util.DatabaseManager;
+import com.autobots.util.Driver;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,8 @@ import javafx.stage.Stage;
 
 public class TransactionController {
     
+    Driver Driver = new Driver();
+
     @FXML private TableView<MenuItem> cartTable;
     @FXML private TableColumn<MenuItem, String> itemCol;
     @FXML private TableColumn<MenuItem, Number> priceCol;

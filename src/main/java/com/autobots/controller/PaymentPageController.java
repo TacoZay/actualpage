@@ -6,6 +6,7 @@ import com.autobots.model.Cart;
 import com.autobots.model.MenuItem;
 import com.autobots.model.PaymentCard;
 import com.autobots.util.DatabaseManager;
+import com.autobots.util.Driver;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -18,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class PaymentPageController {
+    Driver Driver = new Driver();
 
     // --- Header ---
     @FXML private Label headerNameLabel;

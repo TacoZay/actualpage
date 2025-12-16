@@ -37,6 +37,11 @@
             <artifactId>charm-glisten</artifactId>
             <version>6.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>util</artifactId>
+            <version>4.0.24</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -4,12 +4,16 @@ import java.io.IOException;
 
 import com.autobots.model.Cart;
 import com.autobots.model.MenuItem;
+import com.autobots.util.Driver;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 public class MenuOrderPageController {
+
+    Driver Driver = new Driver();
+
     @FXML private ListView<String> miniCartList;
     @FXML private Label subtotalLabel;
 

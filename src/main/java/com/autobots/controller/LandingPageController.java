@@ -2,10 +2,13 @@ package com.autobots.controller;
 
 import java.io.IOException;
 
+import com.autobots.util.Driver;
+
 import javafx.fxml.FXML;
 
 public class LandingPageController {
     
+    Driver Driver = new Driver();
     @FXML 
     private void onMenu() throws IOException {
         Driver.setRoot("MenuOrderPage");
