@@ -4,7 +4,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.autobots.CartController"
+            fx:controller="com.autobots.controller.CartController"
             stylesheets="@styles.css"
             prefWidth="900" prefHeight="520">
 

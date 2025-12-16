@@ -4,7 +4,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.autobots.CreateAccountController"
+            fx:controller="com.autobots.controller.CreateAccountController"
             stylesheets="@styles.css"
             prefWidth="650" prefHeight="450">
 
