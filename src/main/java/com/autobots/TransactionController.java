@@ -52,7 +52,11 @@ public class TransactionController {
     @FXML void addSoda(){ addToCart("Soda Pizza", 2.00);}
 
     private void addToCart(String name, double price){
-        cart.addItem(name, price);
+        // Create the object first
+        MenuItem newItem = new MenuItem(name, price, 1);
+        
+        // Pass the object
+        cart.addItem(newItem);
         updateTotals();
     }
 

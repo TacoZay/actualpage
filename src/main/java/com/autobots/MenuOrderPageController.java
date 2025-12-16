@@ -24,7 +24,11 @@ public class MenuOrderPageController {
     @FXML void addSoda() { addToCart("Soda", 2.00);}
 
     private void addToCart(String name, double price){
-        cart.addItem(name, price);
+        // Create the object first (Name, Price, Quantity)
+        MenuItem newItem = new MenuItem(name, price, 1);
+        
+        // Now pass the object
+        cart.addItem(newItem); 
         updateMiniCart();
     }
 
