@@ -54,9 +54,9 @@ public class DatabaseManager {
             return null;
     }
 
-    public boolean createCustomer(String name, String phone, String rawAddress){
-        String insertCustomer = "INSERT INTO Customer (name, phoneNumber) VALUES (?, ?)";
-        String insertAddress = "INSERT INTO Address (customer_id, streetAddress, city, state, zip) VALUES(?, ?, ?, ? ?)";
+    public boolean createCustomer(String name, String phone, String email, String password, String rawAddress){
+        String insertCustomer = "INSERT INTO Customer (name, phoneNumber, email, password) VALUES (?, ?, ?, ?)";
+        String insertAddress = "INSERT INTO Address (customer_id, streetAddress, city, state, zip) VALUES(?, ?, ?, ?, ?)";
 
         Connection conn = null;
         PreparedStatement pstmt1 = null;
@@ -71,6 +71,8 @@ public class DatabaseManager {
             pstmt1 = conn.prepareStatement(insertCustomer, java.sql.Statement.RETURN_GENERATED_KEYS);
             pstmt1.setString(1, name);
             pstmt1.setString(2, phone);
+            pstmt1.setString(3, email);
+            pstmt1.setString(4, password);
             pstmt1.executeUpdate();
 
             //Generates ID
@@ -289,5 +291,14 @@ public class DatabaseManager {
                 System.out.println("Error: "+e.getMessage());
                 return false;
              }
+    }
+
+    public static boolean isValidEmail(String email){
+        if (email == null){
+            return false;
+        }
+
+        String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return email.matches(regex);
     }
 }

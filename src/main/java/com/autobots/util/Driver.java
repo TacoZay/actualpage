@@ -26,12 +26,12 @@ public class Driver extends Application {
         stage.show();
     }
 
-    public void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource(fxml + ".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource( "/com/autobots/"+fxml+".fxml"));
         return fxmlLoader.load();
     }
 

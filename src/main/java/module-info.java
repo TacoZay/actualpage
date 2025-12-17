@@ -18,6 +18,7 @@ module com.autobots {
     //fix: opens the model package to be used in TableView/ListView(FX properties)
     opens com.autobots.model to javafx.base;
 
+    opens com.autobots.util to javafx.graphics;
     //Export the Utility package
     //the package containing the application's entry point
     exports com.autobots.util;

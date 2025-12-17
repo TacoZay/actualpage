@@ -25,7 +25,7 @@
                <children>
                   <VBox alignment="CENTER_RIGHT">
                       <Label stylesheets="@styles.css" text="YOU ARE SIGNED IN AS:" style="-fx-font-size: 10px; -fx-text-fill: white;" />
-                      <Button onAction="#onProfile" mnemonicParsing="false" style="-fx-padding: 0; -fx-background-color: transparent; -fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white;" text="Customer's Name" />
+                      <Button fx:id="customerNameButton" onAction="#onProfile" mnemonicParsing="false" style="-fx-padding: 0; -fx-background-color: transparent; -fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white;" text="Customer's Name" />
                   </VBox>
                   <Avatar />
                </children>

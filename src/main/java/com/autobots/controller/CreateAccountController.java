@@ -66,10 +66,14 @@ public class CreateAccountController {
         // --- 2. Clean Phone Number for Database ---
         // Convert "(578) 311 - 4000" back to "5783114000"
         String rawPhone = phoneField.getText().replaceAll("[^0-9]", "");
-        
-        String pass = passwordField.getText().trim();
 
-        if (name.isEmpty() || rawPhone.isEmpty() || pass.isEmpty()) {
+        String email = emailField.getText();
+        String pass = passwordField.getText().trim();
+        String rawAddress = "";
+        
+
+
+        if (name.isEmpty() || rawPhone.isEmpty() || pass.isEmpty() || email.isEmpty()) {
             errorLabel.setVisible(true);
             errorLabel.setText("All fields are required.");
             return;
@@ -81,11 +85,18 @@ public class CreateAccountController {
             return;
         }
 
+        //email validation
+        if(!DatabaseManager.isValidEmail(email)){
+            errorLabel.setVisible(true);
+            errorLabel.setText("Please enter a valid email address.");
+            return;
+        }
+
         // --- 3. Save & Login ---
         DatabaseManager db = new DatabaseManager();
         
         // Note: We pass 'rawPhone' (digits only) to the database
-        boolean success = db.createCustomer(name, rawPhone, pass);
+        boolean success = db.createCustomer(name, rawPhone, email, pass, rawAddress);          // do I need to change the parameter name for pass 
 
         if (success) {
             System.out.println("Account Created! Logging in...");
@@ -102,8 +113,10 @@ public class CreateAccountController {
         }
     }
 
-    // @FXML
-    // private void onBackClicked() throws IOException {
-    //     Driver.setRoot("Login");
-    // }
+    @FXML
+    private void onBackClicked() throws IOException {
+        Driver.setRoot("Login");
+    }
+
+    
 }
