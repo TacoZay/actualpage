@@ -117,3 +117,19 @@
     -fx-font-weight: bold;
     -fx-font-size: 14px;
 }
+
+/* Avatar Style for Round Image*/
+.customer-avatar{
+    /* Sets the corner radius to half of the size (50%) to make it round*/
+    /* -fx-border-radius: 50%;
+    -fx-background-radius: 50%; */
+
+    /* Adds a small white border for clarity*/
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+}
+
+.customer-avatar .image-view{
+    -fx-clip: insets(0, 0, 0, 0);
+    -fx-border-radius: 50%;
+}

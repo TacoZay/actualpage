@@ -51,7 +51,7 @@ public class LandingPageController {
             customerNameButton.textProperty().bind(Driver.currentUser.nameProperty());
         } else {
             //if running as guest, the text will say "Guest"
-            customerNameButton.setText("Button");
+            customerNameButton.setText("Guest");
         }
     }
 }
