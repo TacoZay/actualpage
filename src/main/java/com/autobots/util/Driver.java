@@ -21,7 +21,27 @@ public class Driver extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Login"), 1000, 700);
+
+        final double BASE_WIDTH = 1000.0;
+        final double BASE_HEIGHT = 700.0;
+
+        scene = new Scene(loadFXML("Login"),BASE_WIDTH, BASE_HEIGHT);
+        
+        Parent root = scene.getRoot();
+
+        scene.widthProperty().addListener((obs, oldVal, newVal) ->{
+            
+            double scale = newVal.doubleValue() / BASE_WIDTH;
+            root.setScaleX(scale);
+        });
+
+        scene.heightProperty().addListener((obs, oldVal, newVal) ->{
+            
+            double scale = newVal.doubleValue() / BASE_HEIGHT;
+            root.setScaleX(scale);
+        });
+
+        stage.setTitle("Mom and Pop Pizza");
         stage.setScene(scene);
         stage.show();
     }
