@@ -9,47 +9,39 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 /**
  * JavaFX App
  */
 public class Driver extends Application {
 
     private static Scene scene;
-
+    private static LetterboxPane rootPane; 
     public static Customer currentUser = null;
+
+    private static final double BASE_WIDTH = 1000.0;
+    private static final double BASE_HEIGHT = 700.0;
 
     @Override
     public void start(Stage stage) throws IOException {
+       Parent initialContent = loadFXML("LandingPage");
 
-        final double BASE_WIDTH = 1000.0;
-        final double BASE_HEIGHT = 700.0;
+       rootPane = new LetterboxPane(initialContent);
+       
+       scene = new Scene(rootPane, 1000, 700);
 
-        scene = new Scene(loadFXML("Login"),BASE_WIDTH, BASE_HEIGHT);
-        
-        Parent root = scene.getRoot();
-
-        scene.widthProperty().addListener((obs, oldVal, newVal) ->{
-            
-            double scale = newVal.doubleValue() / BASE_WIDTH;
-            root.setScaleX(scale);
-        });
-
-        scene.heightProperty().addListener((obs, oldVal, newVal) ->{
-            
-            double scale = newVal.doubleValue() / BASE_HEIGHT;
-            root.setScaleX(scale);
-        });
-
-        stage.setTitle("Mom and Pop Pizza");
-        stage.setScene(scene);
-        stage.show();
+       stage.setTitle("Mom and Pop Pizza");
+       stage.setScene(scene);
+       stage.show();
+      
     }
 
     public static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+        //When chaning pages, we only replace the content inside the wrapper
+        Parent newContent = loadFXML(fxml);
+        scene.setRoot(new LetterboxPane(newContent));
     }
 
+   
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource( "/com/autobots/"+fxml+".fxml"));
         return fxmlLoader.load();
